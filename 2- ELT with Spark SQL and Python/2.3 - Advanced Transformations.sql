@@ -11,7 +11,11 @@
 
 -- COMMAND ----------
 
-SELECT * FROM customers
+Describe history customers
+
+-- COMMAND ----------
+
+SELECT * FROM customers limit 5
 
 -- COMMAND ----------
 
@@ -21,6 +25,13 @@ DESCRIBE customers
 
 SELECT customer_id, profile:first_name, profile:address:country 
 FROM customers
+Limit 5
+
+-- COMMAND ----------
+
+SELECT customer_id, profile:first_name, profile:address 
+FROM customers
+Limit 5
 
 -- COMMAND ----------
 
@@ -35,11 +46,16 @@ LIMIT 1
 
 -- COMMAND ----------
 
+
+--using 'schema_of_json' junction we can pass a sample column and extract schema from it 
+--using 'from_json' we can change a json field as struct so we can access the fields in '.' format rather than ':' as in json format.
+
 CREATE OR REPLACE TEMP VIEW parsed_customers AS
   SELECT customer_id, from_json(profile, schema_of_json('{"first_name":"Thomas","last_name":"Lane","gender":"Male","address":{"street":"06 Boulevard Victor Hugo","city":"Paris","country":"France"}}')) AS profile_struct
   FROM customers;
   
 SELECT * FROM parsed_customers
+limit 4
 
 -- COMMAND ----------
 
