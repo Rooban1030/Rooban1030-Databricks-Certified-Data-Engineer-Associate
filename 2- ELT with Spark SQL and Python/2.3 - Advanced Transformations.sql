@@ -11,6 +11,7 @@
 
 -- COMMAND ----------
 
+--describe
 Describe history customers
 
 -- COMMAND ----------
