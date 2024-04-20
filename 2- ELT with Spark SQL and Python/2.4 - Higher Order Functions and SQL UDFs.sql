@@ -44,15 +44,18 @@ FROM orders;
 
 -- COMMAND ----------
 
+--UDFs (permanent object - persisted in database - can use in different notebook and spark sessions)
+--CRFR
 CREATE OR REPLACE FUNCTION get_url(email STRING)
 RETURNS STRING
-
+--logic
 RETURN concat("https://www.", split(email, "@")[1])
 
 -- COMMAND ----------
 
 SELECT email, get_url(email) domain
 FROM customers
+limit 6
 
 -- COMMAND ----------
 
@@ -64,7 +67,7 @@ DESCRIBE FUNCTION EXTENDED get_url
 
 -- COMMAND ----------
 
-CREATE FUNCTION site_type(email STRING)
+CREATE OR REPLACE FUNCTION site_type(email STRING)
 RETURNS STRING
 RETURN CASE 
           WHEN email like "%.com" THEN "Commercial business"
