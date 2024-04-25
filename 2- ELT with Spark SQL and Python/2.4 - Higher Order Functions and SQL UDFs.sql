@@ -33,6 +33,7 @@ WHERE size(multiple_copies) > 0;
 
 -- COMMAND ----------
 
+--TRANSFORM
 SELECT
   order_id,
   books,
