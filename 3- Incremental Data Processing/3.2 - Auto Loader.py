@@ -29,7 +29,7 @@ display(files)
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC SELECT * FROM orders_updates
+# MAGIC SELECT * FROM orders_updates LIMIT 4
 
 # COMMAND ----------
 
